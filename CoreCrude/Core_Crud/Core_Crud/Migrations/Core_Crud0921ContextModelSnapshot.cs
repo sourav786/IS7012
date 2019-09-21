@@ -4,16 +4,14 @@ using Core_Crud.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Core_Crud.Migrations
 {
-    [DbContext(typeof(Core_CrudContext))]
-    [Migration("20190914063641_Initial")]
-    partial class Initial
+    [DbContext(typeof(Core_Crud0921Context))]
+    partial class Core_Crud0921ContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -27,13 +25,9 @@ namespace Core_Crud.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("DestinationID");
-
                     b.Property<string>("Name");
 
                     b.HasKey("ID");
-
-                    b.HasIndex("DestinationID");
 
                     b.ToTable("Country");
                 });
@@ -49,7 +43,7 @@ namespace Core_Crud.Migrations
                     b.Property<decimal>("Bill")
                         .HasColumnType("decimal(18, 2)");
 
-                    b.Property<string>("Country");
+                    b.Property<int>("CountryId");
 
                     b.Property<DateTime>("Departure_Date");
 
@@ -59,14 +53,17 @@ namespace Core_Crud.Migrations
 
                     b.HasKey("ID");
 
+                    b.HasIndex("CountryId");
+
                     b.ToTable("Destination");
                 });
 
-            modelBuilder.Entity("Core_Crud.Models.Country", b =>
+            modelBuilder.Entity("Core_Crud.Models.Destination", b =>
                 {
-                    b.HasOne("Core_Crud.Models.Destination")
-                        .WithMany("Countries")
-                        .HasForeignKey("DestinationID");
+                    b.HasOne("Core_Crud.Models.Country", "Country")
+                        .WithMany("Destinations")
+                        .HasForeignKey("CountryId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

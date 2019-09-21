@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Core_Crud.Models;
 
-namespace Core_Crud.Pages.Destinations
+namespace Core_Crud.Pages.Countries
 {
     public class IndexModel : PageModel
     {
@@ -18,12 +18,11 @@ namespace Core_Crud.Pages.Destinations
             _context = context;
         }
 
-        public IList<Destination> Destination { get;set; }
+        public IList<Country> Country { get;set; }
 
         public async Task OnGetAsync()
         {
-            Destination = await _context.Destination
-                .Include(d => d.Country).ToListAsync();
+            Country = await _context.Country.ToListAsync();
         }
     }
 }

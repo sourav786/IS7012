@@ -4,10 +4,23 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Core_Crud.Migrations
 {
-    public partial class Initial : Migration
+    public partial class initial2 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Country",
+                columns: table => new
+                {
+                    ID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Country", x => x.ID);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Destination",
                 columns: table => new
@@ -19,46 +32,32 @@ namespace Core_Crud.Migrations
                     Departure_Date = table.Column<DateTime>(nullable: false),
                     Has_breakfast = table.Column<bool>(nullable: false),
                     Bill = table.Column<decimal>(type: "decimal(18, 2)", nullable: false),
-                    Country = table.Column<string>(nullable: true)
+                    CountryId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Destination", x => x.ID);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Country",
-                columns: table => new
-                {
-                    ID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(nullable: true),
-                    DestinationID = table.Column<int>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Country", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_Country_Destination_DestinationID",
-                        column: x => x.DestinationID,
-                        principalTable: "Destination",
+                        name: "FK_Destination_Country_CountryId",
+                        column: x => x.CountryId,
+                        principalTable: "Country",
                         principalColumn: "ID",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Country_DestinationID",
-                table: "Country",
-                column: "DestinationID");
+                name: "IX_Destination_CountryId",
+                table: "Destination",
+                column: "CountryId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Country");
+                name: "Destination");
 
             migrationBuilder.DropTable(
-                name: "Destination");
+                name: "Country");
         }
     }
 }

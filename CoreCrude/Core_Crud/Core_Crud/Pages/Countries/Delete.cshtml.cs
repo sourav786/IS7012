@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Core_Crud.Models;
 
-namespace Core_Crud.Pages.Destinations
+namespace Core_Crud.Pages.Countries
 {
     public class DeleteModel : PageModel
     {
@@ -19,7 +19,7 @@ namespace Core_Crud.Pages.Destinations
         }
 
         [BindProperty]
-        public Destination Destination { get; set; }
+        public Country Country { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -28,10 +28,9 @@ namespace Core_Crud.Pages.Destinations
                 return NotFound();
             }
 
-            Destination = await _context.Destination
-                .Include(d => d.Country).FirstOrDefaultAsync(m => m.ID == id);
+            Country = await _context.Country.FirstOrDefaultAsync(m => m.ID == id);
 
-            if (Destination == null)
+            if (Country == null)
             {
                 return NotFound();
             }
@@ -45,11 +44,11 @@ namespace Core_Crud.Pages.Destinations
                 return NotFound();
             }
 
-            Destination = await _context.Destination.FindAsync(id);
+            Country = await _context.Country.FindAsync(id);
 
-            if (Destination != null)
+            if (Country != null)
             {
-                _context.Destination.Remove(Destination);
+                _context.Country.Remove(Country);
                 await _context.SaveChangesAsync();
             }
 

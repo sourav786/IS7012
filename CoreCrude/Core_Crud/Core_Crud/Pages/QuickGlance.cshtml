@@ -1,0 +1,29 @@
+﻿@page
+@model Core_Crud.Pages.QuickGlanceModel
+@{
+    ViewData["Title"] = "QuickGlance";
+}
+
+<h1>QuickGlance</h1>
+
+<table class="table table-bordered">
+    <thead class="thead-light">
+        <tr>
+            <th>Arrival_Date</th>
+            <th>Bill</th>
+            <th>Departure_Date</th>
+            <th>Destination_Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var code in Model.Destinations)
+        {
+            <tr>
+                <td>@code.Arrival_Date</td>
+                <td>@code.Bill</td>
+                <td>@code.Departure_Date</td>
+                <td>@code.Destination_Name</td>
+            </tr>
+        }
+    </tbody>
+</table>

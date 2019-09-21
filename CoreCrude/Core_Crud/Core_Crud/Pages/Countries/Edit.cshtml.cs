@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Core_Crud.Models;
 
-namespace Core_Crud.Pages.Destinations
+namespace Core_Crud.Pages.Countries
 {
     public class EditModel : PageModel
     {
@@ -20,7 +20,7 @@ namespace Core_Crud.Pages.Destinations
         }
 
         [BindProperty]
-        public Destination Destination { get; set; }
+        public Country Country { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -29,14 +29,12 @@ namespace Core_Crud.Pages.Destinations
                 return NotFound();
             }
 
-            Destination = await _context.Destination
-                .Include(d => d.Country).FirstOrDefaultAsync(m => m.ID == id);
+            Country = await _context.Country.FirstOrDefaultAsync(m => m.ID == id);
 
-            if (Destination == null)
+            if (Country == null)
             {
                 return NotFound();
             }
-           ViewData["CountryId"] = new SelectList(_context.Country, "ID", "ID");
             return Page();
         }
 
@@ -47,7 +45,7 @@ namespace Core_Crud.Pages.Destinations
                 return Page();
             }
 
-            _context.Attach(Destination).State = EntityState.Modified;
+            _context.Attach(Country).State = EntityState.Modified;
 
             try
             {
@@ -55,7 +53,7 @@ namespace Core_Crud.Pages.Destinations
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!DestinationExists(Destination.ID))
+                if (!CountryExists(Country.ID))
                 {
                     return NotFound();
                 }
@@ -68,9 +66,9 @@ namespace Core_Crud.Pages.Destinations
             return RedirectToPage("./Index");
         }
 
-        private bool DestinationExists(int id)
+        private bool CountryExists(int id)
         {
-            return _context.Destination.Any(e => e.ID == id);
+            return _context.Country.Any(e => e.ID == id);
         }
     }
 }

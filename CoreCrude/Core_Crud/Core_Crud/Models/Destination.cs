@@ -16,9 +16,10 @@ namespace Core_Crud.Models
 
         [Column(TypeName = "decimal(18, 2)")]
         public decimal Bill { get; set; }
-        public string Country { get; set; }
 
-        public ICollection<Country> Countries { get; set; }
+        public int CountryId { get; set; }
+
+        public Country Country { get; set; }
 
     }
 }

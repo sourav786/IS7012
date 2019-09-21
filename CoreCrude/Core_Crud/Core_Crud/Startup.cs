@@ -36,8 +36,8 @@ namespace Core_Crud
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-            services.AddDbContext<Core_CrudContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("Core_CrudContext")));
+            services.AddDbContext<Core_Crud0921Context>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("Core_Crud0921Context")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Core_Crud.Models;
 
-namespace Core_Crud.Pages.Destinations
+namespace Core_Crud.Pages.Countries
 {
     public class DetailsModel : PageModel
     {
@@ -18,7 +18,7 @@ namespace Core_Crud.Pages.Destinations
             _context = context;
         }
 
-        public Destination Destination { get; set; }
+        public Country Country { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -27,10 +27,9 @@ namespace Core_Crud.Pages.Destinations
                 return NotFound();
             }
 
-            Destination = await _context.Destination
-                .Include(d => d.Country).FirstOrDefaultAsync(m => m.ID == id);
+            Country = await _context.Country.FirstOrDefaultAsync(m => m.ID == id);
 
-            if (Destination == null)
+            if (Country == null)
             {
                 return NotFound();
             }

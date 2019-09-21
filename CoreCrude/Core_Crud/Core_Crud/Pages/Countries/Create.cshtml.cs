@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Core_Crud.Models;
 
-namespace Core_Crud.Pages.Destinations
+namespace Core_Crud.Pages.Countries
 {
     public class CreateModel : PageModel
     {
@@ -20,12 +20,11 @@ namespace Core_Crud.Pages.Destinations
 
         public IActionResult OnGet()
         {
-        ViewData["CountryId"] = new SelectList(_context.Country, "ID", "ID");
             return Page();
         }
 
         [BindProperty]
-        public Destination Destination { get; set; }
+        public Country Country { get; set; }
 
         public async Task<IActionResult> OnPostAsync()
         {
@@ -34,7 +33,7 @@ namespace Core_Crud.Pages.Destinations
                 return Page();
             }
 
-            _context.Destination.Add(Destination);
+            _context.Country.Add(Country);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");
