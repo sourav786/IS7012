@@ -4,14 +4,16 @@ using Core_Crud.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Core_Crud.Migrations
 {
     [DbContext(typeof(Core_Crud0921Context))]
-    partial class Core_Crud0921ContextModelSnapshot : ModelSnapshot
+    [Migration("20190928052810_addingcustomvalidation3")]
+    partial class addingcustomvalidation3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
